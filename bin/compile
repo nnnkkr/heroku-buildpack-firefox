@@ -139,6 +139,10 @@ mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME_FIREFOX -C $CACHE_DIR
 mv $CACHE_DIR/$ARCHIVE_NAME_FIREFOX $BUILD_DIR/vendor/
 
+PROFILE_PATH="$BUILD_DIR/.profile.d/firefox.sh"
+mkdir -p $(dirname $PROFILE_PATH)
+echo 'export PATH="$PATH:${HOME}/vendor/firefox"' >> $PROFILE_PATH
+
 # Install Geckodriver
 if ! [ -e $CACHE_DIR/$FILE_NAME_GECKODRIVER ]; then
   topic "Fetching Geckodriver package from ${BUILDPACK_GECKODRIVER_PACKAGE}"
